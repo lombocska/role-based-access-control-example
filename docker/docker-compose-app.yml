@@ -1,0 +1,21 @@
+version: '3.5'
+
+services:
+
+  role-based-access-control-app:
+    container_name: role-based-access-control-app
+    image: lombocska/role-based-access-control-example
+    ports:
+      - "8080:8080"
+    environment:
+      GRAPHITE_HOST: graphite-grafana
+      GRAPHITE_PORT: 2003
+      DB_HOST: app-postgres
+      DB_PORT: 5432
+    networks:
+      - rbac-network
+
+
+networks:
+  rbac-network:
+    driver: bridge

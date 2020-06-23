@@ -1,0 +1,31 @@
+version: '3.5'
+
+services:
+  graphite:
+    container_name: graphite-grafana
+    image: eminn/grafana-dashboard
+    ports:
+      - "80:80"
+      - "2003:2003"
+      - "81:81"
+      - "8125:8125"
+      - "8126:8126"
+    networks:
+      - rbac-network
+
+  app-postgres:
+    image: postgres:12.1
+    container_name: "app-postgres"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - rbac-network
+
+
+networks:
+  rbac-network:
+    driver: bridge

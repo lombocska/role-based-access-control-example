@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${IT_POSTGRES_HOST:localhost}:${IT_POSTGRES_PORT:25432}/postgres?useUnicode=true&characterEncoding=utf8
+    username: postgres
+    password: postgres
+  jpa:
+    show-sql: false
+  liquibase:
+    contexts: ${spring.profiles.active:it}
+
+management:
+  metrics:
+    export:
+      graphite:
+        enabled: false
+
