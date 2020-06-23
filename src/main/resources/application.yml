@@ -1,1 +1,39 @@
+spring:
+  application:
+    name: '@name@'
+    version: '@version@'
+  datasource:
+    pool-prepared-statements: true
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:postgres}?useUnicode=true&characterEncoding=utf8
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+  jpa:
+    open-in-view: false
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+    generate-ddl: false
+    hibernate:
+      naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+      ddl-auto: validate
+    properties:
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: false
+      hibernate.temp.use_jdbc_metadata_defaults: false
+  liquibase:
+    change-log: classpath:db/liquibase-changelog.xml
+
+management:
+  endpoints.web.base-path: "/"
+  metrics.export.graphite:
+    host: ${GRAPHITE_HOST:localhost}
+    port: ${GRAPHITE_PORT:2003}
+    global-prefix: ${spring.application.name}
+    protocol: PLAINTEXT
+    step: 10s
+
+
+logging:
+  level:
+    io.falcon: ${LOG_LEVEL_FALCON:INFO}
 
