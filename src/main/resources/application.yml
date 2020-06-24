@@ -24,14 +24,13 @@ spring:
     change-log: classpath:db/liquibase-changelog.xml
 
 management:
-  endpoints.web.base-path: "/"
-  metrics.export.graphite:
-    host: ${GRAPHITE_HOST:localhost}
-    port: ${GRAPHITE_PORT:2003}
-    global-prefix: ${spring.application.name}
-    protocol: PLAINTEXT
-    step: 10s
-
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
 logging:
   level:
