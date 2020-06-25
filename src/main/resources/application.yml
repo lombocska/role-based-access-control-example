@@ -11,7 +11,7 @@ spring:
     open-in-view: false
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: false
-    generate-ddl: false
+    generate-ddl: true
     hibernate:
       naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
       ddl-auto: validate
@@ -22,7 +22,8 @@ spring:
       hibernate.temp.use_jdbc_metadata_defaults: false
   liquibase:
     change-log: classpath:db/liquibase-changelog.xml
-
+  thymeleaf:
+    cache: false
 management:
   endpoints:
     web:
@@ -34,5 +35,6 @@ management:
 
 logging:
   level:
-    io.falcon: ${LOG_LEVEL_FALCON:INFO}
+    io.lombocska: ${LOG_LEVEL_APP:INFO}
+    org.springframework.security: INFO
 
