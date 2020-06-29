@@ -1,6 +1,6 @@
 package io.lombocska.app.config;
 
-import io.lombocska.app.model.User;
+import io.lombocska.app.model.Account;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -34,7 +34,7 @@ public class WithMockSecurityContextFactory implements WithSecurityContextFactor
 		return context;
 	}
 
-	private User mockedUser(WithMockAppUser annotation) {
-		return mock(User.class);
+	private Account mockedUser(WithMockAppUser annotation) {
+		return mock(Account.class);
 	}
 }

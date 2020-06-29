@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles({"it"})
-class UserServiceIT {
+class AccountServiceIT {
 
 	@Autowired
 	private UserService userService;

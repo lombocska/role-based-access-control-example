@@ -32,8 +32,8 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"), schema = "app")
-public class User implements Serializable {
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"), name = "account")
+public class Account implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -61,9 +61,8 @@ public class User implements Serializable {
 	@JsonIgnore
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
-			schema = "app",
-			name = "user_authority",
-			joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+			name = "account_authority",
+			joinColumns = {@JoinColumn(name = "account_id", referencedColumnName = "id")},
 			inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")})
 	@BatchSize(size = 20)
 	private Set<Authority> authorities = new HashSet<>();

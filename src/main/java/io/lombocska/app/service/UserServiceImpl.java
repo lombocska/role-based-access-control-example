@@ -2,7 +2,7 @@ package io.lombocska.app.service;
 
 import io.lombocska.app.dto.UserDTO;
 import io.lombocska.app.model.Authority;
-import io.lombocska.app.model.User;
+import io.lombocska.app.model.Account;
 import io.lombocska.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,9 +34,9 @@ public class UserServiceImpl implements UserService {
 	public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
 		log.debug("Finding user with email {}", email);
 		return this.userRepository.findByEmail(email)
-				.map(customUser -> new org.springframework.security.core.userdetails.User(customUser.getEmail(),
-						customUser.getPassword(),
-						mapRolesToAuthorities(customUser.getAuthorities())))
+				.map(customAccount -> new org.springframework.security.core.userdetails.User(customAccount.getEmail(),
+						customAccount.getPassword(),
+						mapRolesToAuthorities(customAccount.getAuthorities())))
 				.orElseThrow(() -> USERNAME_NOT_FOUND_EXCEPTION);
 	}
 
@@ -61,12 +61,13 @@ public class UserServiceImpl implements UserService {
 	public void onApplicationEvent(AuthenticationSuccessEvent event) {
 		final String userName = ((UserDetails) event.getAuthentication().
 				getPrincipal()).getUsername();
-		final User user = this.mandatoryGetUser(userName);
+		log.debug("User with email {} has successfully logged in.", userName);
+		final Account account = this.mandatoryGetUser(userName);
 		final LocalDateTime lastLoginDate = LocalDateTime.ofInstant(Instant.ofEpochMilli(event.getTimestamp()), TimeZone.getDefault().toZoneId());
-		user.setLastLoginDate(lastLoginDate);
+		account.setLastLoginDate(lastLoginDate);
 	}
 
-	private User mandatoryGetUser(final String email) {
+	private Account mandatoryGetUser(final String email) {
 		return this.userRepository.findByEmail(email).orElseThrow(() -> USERNAME_NOT_FOUND_EXCEPTION);
 	}
 
@@ -76,13 +77,13 @@ public class UserServiceImpl implements UserService {
 				.collect(Collectors.toList());
 	}
 
-	private UserDTO toDTO(final User user) {
+	private UserDTO toDTO(final Account account) {
 		return UserDTO.builder()
-				.id(user.getId())
-				.userName(user.getUserName())
-				.email(user.getEmail())
-				.authorities(user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()))
-				.lastLoginDate(user.getLastLoginDate())
+				.id(account.getId())
+				.userName(account.getUserName())
+				.email(account.getEmail())
+				.authorities(account.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet()))
+				.lastLoginDate(account.getLastLoginDate())
 				.build();
 	}
 

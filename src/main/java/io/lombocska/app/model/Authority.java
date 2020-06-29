@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "authority", schema = "app")
+@Table(name = "authority")
 public class Authority implements Serializable {
 
     private static final long serialVersionUID = 1L;

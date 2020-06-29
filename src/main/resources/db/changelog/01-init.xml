@@ -3,18 +3,9 @@
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
-    <changeSet id="00000000000000" author="lombos.monika">
-        <createSequence sequenceName="sequence_generator" startValue="1050" incrementBy="50"/>
-    </changeSet>
-
-    <changeSet id="00" author="lombos.monika">
-        <sql dbms="postgresql" endDelimiter=";">
-            CREATE SCHEMA app
-        </sql>
-    </changeSet>
 
     <changeSet id="01" author="lombos.monika">
-        <createTable tableName="user" schemaName="app">
+        <createTable tableName="account">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -26,14 +17,14 @@
             <column name="last_login_date" type="TIMESTAMP"/>
         </createTable>
 
-        <createTable tableName="authority" schemaName="app">
+        <createTable tableName="authority">
             <column name="name" type="varchar(50)">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
         </createTable>
 
-        <createTable tableName="user_authority" schemaName="app">
-            <column name="user_id" type="bigint">
+        <createTable tableName="account_authority">
+            <column name="account_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="authority_name" type="varchar(50)">
@@ -41,51 +32,43 @@
             </column>
         </createTable>
 
-        <addPrimaryKey columnNames="user_id, authority_name" tableName="user_authority" schemaName="app"/>
+        <addPrimaryKey columnNames="account_id, authority_name" tableName="account_authority" />
 
 
         <addForeignKeyConstraint baseColumnNames="authority_name"
-                                 baseTableName="user_authority"
-                                 baseTableSchemaName="app"
+                                 baseTableName="account_authority"
                                  constraintName="fk_authority_name"
                                  referencedColumnNames="name"
-                                 referencedTableName="authority"
-                                 referencedTableSchemaName="app"/>
+                                 referencedTableName="authority"/>
 
-        <addForeignKeyConstraint baseColumnNames="user_id"
-                                 baseTableName="user_authority"
-                                 baseTableSchemaName="app"
-                                 constraintName="fk_user_id"
+        <addForeignKeyConstraint baseColumnNames="account_id"
+                                 baseTableName="account_authority"
+                                 constraintName="fk_account_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="user"
-                                 referencedTableSchemaName="app"/>
+                                 referencedTableName="account"/>
 
         <addNotNullConstraint columnName="password"
                               columnDataType="varchar(60)"
-                              tableName="user"
-                              schemaName="app"/>
+                              tableName="account"/>
 
         <loadData
-            file="db/data/user.csv"
+            file="db/data/account.csv"
             separator=";"
-            tableName="user"
-            schemaName="app">
+            tableName="account">
             <column name="id" type="numeric"/>
         </loadData>
         <loadData
             file="db/data/authority.csv"
             separator=";"
-            tableName="authority"
-            schemaName="app">
+            tableName="authority">
             <column name="name" type="string"/>
         </loadData>
 
         <loadData
-            file="db/data/user_authority.csv"
+            file="db/data/account_authority.csv"
             separator=";"
-            tableName="user_authority"
-            schemaName="app">
-            <column name="user_id" type="numeric"/>
+            tableName="account_authority">
+            <column name="account_id" type="numeric"/>
         </loadData>
     </changeSet>
 
