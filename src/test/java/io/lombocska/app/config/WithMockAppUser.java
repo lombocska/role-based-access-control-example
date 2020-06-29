@@ -1,4 +1,4 @@
-package io.lombocska.app.controller;
+package io.lombocska.app.config;
 
 import org.springframework.security.test.context.support.WithSecurityContext;
 

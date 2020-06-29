@@ -1,8 +1,7 @@
 package io.lombocska.app.config;
 
-import io.lombocska.app.security.AuthenticationHandler;
 import io.lombocska.app.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -16,14 +15,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	@Autowired
-	private UserService userService;
-
-	@Autowired
-	private AuthenticationHandler authenticationHandler;
+	private final UserService userService;
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -37,7 +33,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 				.antMatchers(HttpMethod.GET, "/").permitAll()
 				.anyRequest().authenticated()
-				.and().formLogin().successHandler(this.authenticationHandler).defaultSuccessUrl("/").permitAll()
+				.and().formLogin()
+				.defaultSuccessUrl("/").permitAll()
 				.and().logout().logoutSuccessUrl("/login");
 	}
 

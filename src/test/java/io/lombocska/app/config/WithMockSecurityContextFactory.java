@@ -1,4 +1,4 @@
-package io.lombocska.app.controller;
+package io.lombocska.app.config;
 
 import io.lombocska.app.model.User;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

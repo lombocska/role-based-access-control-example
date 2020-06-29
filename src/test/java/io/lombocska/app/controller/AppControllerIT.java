@@ -1,5 +1,6 @@
 package io.lombocska.app.controller;
 
+import io.lombocska.app.config.WithMockAppUser;
 import io.lombocska.app.dto.UserDTO;
 import io.lombocska.app.service.UserService;
 import lombok.SneakyThrows;

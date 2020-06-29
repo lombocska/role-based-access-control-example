@@ -6,6 +6,7 @@ import io.lombocska.app.model.User;
 import io.lombocska.app.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,7 +14,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpSession;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -58,10 +58,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public void onAuthenticationSuccess(final HttpSession session, final String email) {
-		log.debug("Enriching user email[{}] with session id and last login date.", email);
-		final User user = this.mandatoryGetUser(email);
-		final LocalDateTime lastLoginDate = LocalDateTime.ofInstant(Instant.ofEpochMilli(session.getLastAccessedTime()), TimeZone.getDefault().toZoneId());
+	public void onApplicationEvent(AuthenticationSuccessEvent event) {
+		final String userName = ((UserDetails) event.getAuthentication().
+				getPrincipal()).getUsername();
+		final User user = this.mandatoryGetUser(userName);
+		final LocalDateTime lastLoginDate = LocalDateTime.ofInstant(Instant.ofEpochMilli(event.getTimestamp()), TimeZone.getDefault().toZoneId());
 		user.setLastLoginDate(lastLoginDate);
 	}
 
