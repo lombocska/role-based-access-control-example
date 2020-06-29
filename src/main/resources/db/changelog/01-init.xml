@@ -23,6 +23,7 @@
             <column name="email" type="varchar(191)">
                 <constraints unique="true" nullable="true" uniqueConstraintName="ux_user_email"/>
             </column>
+            <column name="last_login_date" type="TIMESTAMP"/>
         </createTable>
 
         <createTable tableName="authority" schemaName="app">

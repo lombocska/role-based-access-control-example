@@ -1,5 +1,6 @@
 package io.lombocska.app.config;
 
+import io.lombocska.app.security.AuthenticationHandler;
 import io.lombocska.app.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +22,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserService userService;
 
+	@Autowired
+	private AuthenticationHandler authenticationHandler;
+
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
@@ -33,9 +37,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 				.antMatchers(HttpMethod.GET, "/").permitAll()
 				.anyRequest().authenticated()
-				.and().formLogin().defaultSuccessUrl("/").permitAll()
-				.and()
-				.logout().logoutSuccessUrl("/login");
+				.and().formLogin().successHandler(this.authenticationHandler).defaultSuccessUrl("/").permitAll()
+				.and().logout().logoutSuccessUrl("/login");
 	}
 
 	@Override

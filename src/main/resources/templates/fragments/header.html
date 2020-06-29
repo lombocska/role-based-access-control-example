@@ -19,8 +19,9 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/administration}">Administration Page<span class="sr-only">(current)</span></a>
+                <li class="nav-item active" sec:authorize="isAuthenticated()">
+                    <a class="nav-link" th:href="@{/administration}">Administration Page<span
+                            class="sr-only">(current)</span></a>
                 </li>
                 <li sec:authorize="hasAuthority('ROLE_EDITOR')" class="nav-item active">
                     <a class="nav-link" th:href="@{/content-editor}">Content Editor Page<span
@@ -32,8 +33,12 @@
             </ul>
             <span class="navbar-text" sec:authorize="isAuthenticated()">
                 Logged user: <span sec:authentication="name"></span>
+                <ul class="navbar-text">
+                    <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+                </ul>
+            </span>
             <ul  class="navbar-text">
-                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+                <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></li>
             </ul>
         </div>
     </nav>

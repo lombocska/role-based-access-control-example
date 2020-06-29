@@ -23,6 +23,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -67,4 +68,6 @@ public class User implements Serializable {
 	@BatchSize(size = 20)
 	private Set<Authority> authorities = new HashSet<>();
 
+	@Column(name = "last_login_date")
+	private LocalDateTime lastLoginDate;
 }
