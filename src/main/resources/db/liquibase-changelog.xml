@@ -13,5 +13,6 @@
     <property name="uuidType" value="uuid" dbms="h2, postgresql"/>
 
     <include file="db/changelog/01-init.xml" relativeToChangelogFile="false"/>
+    <include file="db/changelog/02-load-dev-data.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>

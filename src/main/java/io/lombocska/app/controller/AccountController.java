@@ -1,9 +1,9 @@
 package io.lombocska.app.controller;
 
-import io.lombocska.app.dto.UserDTO;
+import io.lombocska.app.dto.AccountDTO;
 import io.lombocska.app.authorization.IsEditor;
 import io.lombocska.app.authorization.IsUser;
-import io.lombocska.app.service.UserService;
+import io.lombocska.app.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,9 +17,9 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
-public class UserController {
+public class AccountController {
 
-	private final UserService userService;
+	private final AccountService accountService;
 
 	@IsUser
 	@GetMapping("/user")
@@ -42,11 +42,11 @@ public class UserController {
 				.collect(Collectors.toList())
 				.contains("ROLE_ADMIN");
 		if (isAdmin) {
-			final List<UserDTO> users = this.userService.findAll();
-			model.addAttribute("users", users);
+			final List<AccountDTO> accounts = this.accountService.findAll();
+			model.addAttribute("accounts", accounts);
 		} else {
-			final UserDTO user = this.userService.findByEmail(authentication.getName());
-			model.addAttribute("users", user);
+			final AccountDTO accounts  = this.accountService.findByEmail(authentication.getName());
+			model.addAttribute("accounts", accounts);
 		}
 		return "administration-page";
 	}

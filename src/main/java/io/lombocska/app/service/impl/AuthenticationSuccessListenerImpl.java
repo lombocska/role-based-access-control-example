@@ -2,7 +2,7 @@ package io.lombocska.app.service.impl;
 
 import io.lombocska.app.service.ErrorConstant;
 import io.lombocska.app.model.Account;
-import io.lombocska.app.repository.UserRepository;
+import io.lombocska.app.repository.AccountRepository;
 import io.lombocska.app.service.AuthenticationListenerBase;
 import io.lombocska.app.service.LoginAttemptService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ import java.util.TimeZone;
 @RequiredArgsConstructor
 public class AuthenticationSuccessListenerImpl extends AuthenticationListenerBase implements ApplicationListener<InteractiveAuthenticationSuccessEvent> {
 
-	private final UserRepository userRepository;
+	private final AccountRepository accountRepository;
 	private final LoginAttemptService loginAttemptService;
 
 	@Autowired
@@ -48,6 +48,6 @@ public class AuthenticationSuccessListenerImpl extends AuthenticationListenerBas
 	}
 
 	private Account mandatoryGetUser(final String email) {
-		return this.userRepository.findByEmail(email).orElseThrow(() -> ErrorConstant.USERNAME_NOT_FOUND_EXCEPTION);
+		return this.accountRepository.findByEmail(email).orElseThrow(() -> ErrorConstant.USERNAME_NOT_FOUND_EXCEPTION);
 	}
 }

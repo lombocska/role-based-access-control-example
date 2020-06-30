@@ -1,6 +1,6 @@
 package io.lombocska.app.config;
 
-import io.lombocska.app.service.UserService;
+import io.lombocska.app.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,7 +18,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-	private final UserService userService;
+	private final AccountService accountService;
 	private final AuthenticationFailureHandler failureHandler;
 
 	@Bean
@@ -48,7 +48,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(this.userService);
+		auth.userDetailsService(this.accountService);
 	}
 
 }

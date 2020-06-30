@@ -1,19 +1,21 @@
 package io.lombocska.app.dto;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
 @Builder
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class UserDTO {
+@NoArgsConstructor
+@AllArgsConstructor
+public class AccountDTO implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 	private String userName;

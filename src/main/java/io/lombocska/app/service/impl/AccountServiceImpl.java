@@ -1,11 +1,11 @@
 package io.lombocska.app.service.impl;
 
 import io.lombocska.app.service.ErrorConstant;
-import io.lombocska.app.dto.UserDTO;
+import io.lombocska.app.dto.AccountDTO;
 import io.lombocska.app.model.Account;
 import io.lombocska.app.model.Authority;
-import io.lombocska.app.repository.UserRepository;
-import io.lombocska.app.service.UserService;
+import io.lombocska.app.repository.AccountRepository;
+import io.lombocska.app.service.AccountService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
@@ -23,14 +23,14 @@ import java.util.stream.Collectors;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService {
+public class AccountServiceImpl implements AccountService {
 
-	private final UserRepository userRepository;
+	private final AccountRepository accountRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(final String email) throws UsernameNotFoundException {
 		log.debug("Finding user with email {}", email);
-		return this.userRepository.findByEmail(email)
+		return this.accountRepository.findByEmail(email)
 				.map(customAccount -> new org.springframework.security.core.userdetails.User(customAccount.getEmail(),
 						customAccount.getPassword(),
 						mapRolesToAuthorities(customAccount.getAuthorities())))
@@ -38,17 +38,17 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<UserDTO> findAll() {
-		return this.userRepository.findAll()
+	public List<AccountDTO> findAll() {
+		return this.accountRepository.findAll()
 				.stream()
 				.map(this::toDTO)
 				.collect(Collectors.toList());
 	}
 
 	@Override
-	public UserDTO findByEmail(final String email) {
+	public AccountDTO findByEmail(final String email) {
 		log.debug("Finding user with email {}", email);
-		return this.userRepository.findByEmail(email)
+		return this.accountRepository.findByEmail(email)
 				.map(this::toDTO)
 				.orElseThrow(() -> ErrorConstant.USERNAME_NOT_FOUND_EXCEPTION);
 	}
@@ -59,8 +59,8 @@ public class UserServiceImpl implements UserService {
 				.collect(Collectors.toList());
 	}
 
-	private UserDTO toDTO(final Account account) {
-		return UserDTO.builder()
+	private AccountDTO toDTO(final Account account) {
+		return AccountDTO.builder()
 				.id(account.getId())
 				.userName(account.getUserName())
 				.email(account.getEmail())
