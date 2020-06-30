@@ -12,12 +12,3 @@ services:
       DB_HOST: app-postgres
       DB_PORT: 5432
       LIQUIBASE_CONTEXTS: dev
-
-  role-based-access-control-app-2:
-    container_name: app-2
-    image: lombocska/role-based-access-control-example
-    ports:
-      - "8081:8080"
-    environment:
-      DB_HOST: app-postgres
-      DB_PORT: 5432
