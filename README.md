@@ -9,6 +9,7 @@
   <a href="#tech-stack">Tech Stack</a> •
   <a href="#approaches-highlighting-some-tech-savvy-things">Approaches</a> •
   <a href="#usage">Usage</a> •
+  <a href="#user-credentials">User credentials</a> •
   <a href="#inspirations">Inspiration</a>
   <a href="#improvements-possibilities">Improvements Possibilities</a>
 </p>
@@ -130,10 +131,10 @@ Note: LIQUIBASE_CONTEXTS environment variable should set to 'dev' for getting de
 ## USAGE 
 
 0. `./mvnw clean install` for creating the docker image of the app and running tests
-1. fire up postgres, prometheus, grafana and the app itself `docker-compose -f docker/postgresql.yml docker/monitoring.yml docker/app.yml up --build`
+1. fire up postgres, prometheus, grafana and the app itself `docker-compose -f docker/postgresql.yml -f docker/monitoring.yml -f docker/app.yml up --build`
 2. visit `localhost:8080`
 3. login page should prompt
-4. login with valid credentials mentioned here //TODO ref
+4. login with valid credentials mentioned here  <a href="#user-credentials">User credentials</a> •
 5. check pages with different authorities
 
 6. visit `localhost:3000`
@@ -144,6 +145,13 @@ Note: LIQUIBASE_CONTEXTS environment variable should set to 'dev' for getting de
 ```
 Note: docker settings (host.docker.internal) works for MacOS, but on Windows it won't. In theory, 'host' should be used on Windows, but I don't have a chance to try it out.
 ```
+
+## USER CREDENTIALS
+
+1. username: admin@admin.com • password: tes • authorities: ROLE_ADMIN, ROLE_EDITOR, ROLE_USER
+1. username: user1@test.com • password: test • authorities: ROLE_EDITOR, ROLE_USER
+1. username: user2@test.com • password: test • authorities: ROLE_EDITOR
+1. username: user3@test.com • password: test • authorities: ROLE_USER
 
 ## INSPIRATIONS
 
