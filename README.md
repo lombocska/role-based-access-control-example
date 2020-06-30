@@ -1,8 +1,17 @@
 # ROLE BASED ACCESS CONTROL EXAMPLE
 
+
 [![Github Repo](https://img.shields.io/badge/GitHub-Repo-green.svg?longCache=true&style=flat)](https://github.com/lombocska/role-based-access-control-example)
 ![Github Actions](https://github.com/lombocska/role-based-access-control-example/workflows/Java%20CI%20with%20Maven/badge.svg)
 
+<p align="center">
+  <a href="#description">Description</a> •
+  <a href="#tech-stack">Tech Stack</a> •
+  <a href="#approaches-highlighting-some-tech-savvy-things">Approaches</a> •
+  <a href="#usage">Usage</a> •
+  <a href="#inspirations">Inspiration</a>
+  <a href="#improvements-possibilities">Improvements Possibilities</a>
+</p>
 
 ## DESCRIPTION
 
@@ -146,7 +155,7 @@ Note: docker settings (host.docker.internal) works for MacOS, but on Windows it 
 - [Spring Session](https://spring.io/projects/spring-session-jdbc)
 
 
-## IMPROVEMENTS POSSIBILITY
+## IMPROVEMENTS POSSIBILITIES
 
 - [ ] authorization test had to be disabled, because thymeleaf template was unserializable
 - [ ] tracing (sleuth)
