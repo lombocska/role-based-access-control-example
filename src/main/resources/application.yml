@@ -39,3 +39,10 @@ logging:
     io.lombocska: ${LOG_LEVEL_APP:DEBUG}
     org.springframework.security: INFO
 
+google:
+  recaptcha:
+    key:
+      site: ${GOOGLE_RECAPTCHA_SITE_KEY:6LffHqsZAAAAAHP6k2kbXaSxq9AKX_LYO7Ua1D77}
+      secret: ${GOOGLE_RECAPTCHA_SECRET_KEY:6LffHqsZAAAAACRUp2H8FwOBzjGO5bjDgs6gf34V}
+      verificationUrl: "https://www.google.com/recaptcha/api/siteverify"
+

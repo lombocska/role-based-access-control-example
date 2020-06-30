@@ -1,9 +1,10 @@
 package io.lombocska.app.service;
 
 public interface LoginAttemptService {
-	boolean isMaxLoginAttemptReached(String loginAttemptKey);
 
-	int markLoginAttempt(String loginAttemptKey);
+	boolean isBlocked(String loginAttemptKey);
 
-	int countLoginAttempt(String loginAttemptKey);
+	int loginFailed(String loginAttemptKey);
+
+	void loginSucceed(String loginAttemptKey, String reCaptcha);
 }

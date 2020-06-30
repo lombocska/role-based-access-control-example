@@ -1,4 +1,4 @@
-package io.lombocska.app;
+package io.lombocska.app.service;
 
 import lombok.experimental.UtilityClass;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

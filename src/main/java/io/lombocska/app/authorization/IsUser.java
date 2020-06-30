@@ -1,4 +1,4 @@
-package io.lombocska.app.security;
+package io.lombocska.app.authorization;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 
@@ -9,6 +9,6 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@PreAuthorize("hasAnyRole('ROLE_EDITOR')")
-public @interface IsEditor {
+@PreAuthorize("hasAnyAuthority('ROLE_USER')")
+public @interface IsUser {
 }

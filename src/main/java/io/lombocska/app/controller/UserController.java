@@ -1,8 +1,8 @@
 package io.lombocska.app.controller;
 
 import io.lombocska.app.dto.UserDTO;
-import io.lombocska.app.security.IsEditor;
-import io.lombocska.app.security.IsUser;
+import io.lombocska.app.authorization.IsEditor;
+import io.lombocska.app.authorization.IsUser;
 import io.lombocska.app.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
-public class AppController {
+public class UserController {
 
 	private final UserService userService;
 

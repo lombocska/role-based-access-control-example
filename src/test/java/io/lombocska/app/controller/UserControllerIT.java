@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles({"it"})
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class AppControllerIT {
+public class UserControllerIT {
 
 	private static final String USER_PATH = "/user";
 	private static final String EDITOR_PATH = "/content-editor";
