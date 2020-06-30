@@ -120,6 +120,7 @@ Note: LIQUIBASE_CONTEXTS environment variable should set to 'dev' for getting de
 
 ## USAGE 
 
+0. `./mvnw clean install` for creating the docker image of the app and running tests
 1. fire up postgres, prometheus, grafana and the app itself `docker-compose -f docker/postgresql.yml docker/monitoring.yml docker/app.yml up --build`
 2. visit `localhost:8080`
 3. login page should prompt
@@ -147,10 +148,11 @@ Note: docker settings (host.docker.internal) works for MacOS, but on Windows it 
 
 ## IMPROVEMENTS POSSIBILITY
 
-- authorization test had to be disabled, because thymeleaf template was unserializable
-- tracing
-- service discovery?
-- maven wrapper
-- dockerfile run with account not default
+- [ ] authorization test had to be disabled, because thymeleaf template was unserializable
+- [ ] tracing (sleuth)
+- [ ] dockerfile run with account not default
+- [ ] ELK stack for logging
+- [ ] publish to docker hub via github actions
+- [ ] prometheus metrics for failed, succeeded login attempts
 
 
