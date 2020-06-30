@@ -1,7 +1,8 @@
 # ROLE BASED ACCESS CONTROL EXAMPLE
 
 [![Github Repo](https://img.shields.io/badge/GitHub-Repo-green.svg?longCache=true&style=flat)](https://github.com/lombocska/role-based-access-control-example)
-![Github Actions](https://github.com/lombocska/role-based-access-control-example/workflows/.github/workflows/maven.yml/badge.svg)
+![Github Actions](https://github.com/lombocska/role-based-access-control-example/workflows/Java%20CI%20with%20Maven/badge.svg)
+)
 
 
 ## DESCRIPTION
