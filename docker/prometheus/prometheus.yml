@@ -22,3 +22,4 @@ scrape_configs:
           # On MacOS, replace localhost by host.docker.internal
           - host.docker.internal:8080
           - host.docker.internal:8081
+          - localhost:8080
