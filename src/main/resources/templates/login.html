@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login Page</title>
+    <div th:replace="fragments/header :: header-css"/>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+</head>
+
+<body>
+<div class="container">
+    <form  th:action="@{/login}" method="post">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <div class="form-group row">
+            <label for="username" class="col-sm-2 col-form-label">Username</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required
+                   autofocus>
+        </div>
+        <div class="form-group row">
+            <label for="password" class="col-sm-2 col-form-label">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        </div>
+        <div class="form-group row" th:if="${param.keySet().contains('kaptcha')}">
+            <div class="g-recaptcha col-sm-5"
+                 th:attr="data-sitekey=${@reCaptchaProperties.getSite()}">
+            <!--                 th:attr="data-sitekey=${@environment.getProperty('google.recaptcha.site-key')}">-->
+        </div>
+            <span id="captchaError" class="alert alert-danger col-sm-4"
+                  style="display:none"></span>
+        </div>
+        <button class="btn btn-primary" type="submit">Sign in</button>
+    </form>
+
+</div>
+</body>
+</html>

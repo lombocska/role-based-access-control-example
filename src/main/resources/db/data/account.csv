@@ -1,0 +1,5 @@
+id;password;user_name;email
+1;$2a$10$JlNLwVxfAKB2JiEK7/D4oOtD.df3SRLEhDwrZK7r6y/wRG4wP5FFy;Admin;admin@admin.com
+2;$2a$10$JlNLwVxfAKB2JiEK7/D4oOtD.df3SRLEhDwrZK7r6y/wRG4wP5FFy;User 1;user1@test.com
+3;$2a$10$JlNLwVxfAKB2JiEK7/D4oOtD.df3SRLEhDwrZK7r6y/wRG4wP5FFy;User 2;user2@test.com
+4;$2a$10$JlNLwVxfAKB2JiEK7/D4oOtD.df3SRLEhDwrZK7r6y/wRG4wP5FFy;User 3;user3@test.com

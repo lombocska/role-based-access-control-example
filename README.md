@@ -11,7 +11,7 @@
 
 ## TECH STACK
 - TODO list of the used frameworks, dependencies
-
+- Spring 2.3.1
 ## APPROACHES
 
 
@@ -26,9 +26,9 @@
 ### prometheus for metrics
 
 > Prometheus is an open-source systems monitoring and alerting toolkit originally built at SoundCloud. 
-> Since its inception in 2012, many companies and organizations have adopted Prometheus, and the project has a very active developer and user community.
+> Since its inception in 2012, many companies and organizations have adopted Prometheus, and the project has a very active developer and account community.
 
-
+--DefaultLoginPageGeneratingFilter
 
 
 ## INSPIRATIONS
@@ -51,6 +51,6 @@
 - app event handling -> audit
 - maven wrapper
 - logging
-- dockerfile run with user not default
+- dockerfile run with account not default
 
 

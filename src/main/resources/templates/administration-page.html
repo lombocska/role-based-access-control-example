@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<title>Administration Page</title>
+	<div th:replace="fragments/header :: header-css"/>
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container-fluid">
+
+	<table class="table">
+
+		<thead class="thead-dark">
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Username</th>
+			<th scope="col">Authorities</th>
+			<th scope="col">Last login date</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:each="account : ${accounts}">
+			<th scope="row" th:text="${account.id}">1</th>
+			<td th:text="${account.userName}">username</td>
+			<td th:text="${account.authorities}"></td>
+			<td th:text="${account.lastLoginDate}">last login</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

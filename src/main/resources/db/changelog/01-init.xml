@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet id="00000000000000" author="lombos.monika">
+        <createSequence sequenceName="sequence_generator" startValue="1050" incrementBy="50"/>
+    </changeSet>
+
+    <changeSet id="01" author="lombos.monika">
+        <createTable tableName="account">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="password" type="varchar(60)"/>
+            <column name="user_name" type="varchar(50)"/>
+            <column name="email" type="varchar(191)">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_user_email"/>
+            </column>
+            <column name="last_login_date" type="TIMESTAMP"/>
+        </createTable>
+
+        <createTable tableName="authority">
+            <column name="name" type="varchar(50)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="account_authority">
+            <column name="account_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="authority_name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="account_id, authority_name" tableName="account_authority" />
+
+
+        <addForeignKeyConstraint baseColumnNames="authority_name"
+                                 baseTableName="account_authority"
+                                 constraintName="fk_authority_name"
+                                 referencedColumnNames="name"
+                                 referencedTableName="authority"/>
+
+        <addForeignKeyConstraint baseColumnNames="account_id"
+                                 baseTableName="account_authority"
+                                 constraintName="fk_account_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="account"/>
+
+        <addNotNullConstraint columnName="password"
+                              columnDataType="varchar(60)"
+                              tableName="account"/>
+
+        <loadData
+                file="db/data/authority.csv"
+                separator=";"
+                tableName="authority">
+            <column name="name" type="string"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet id="02" author="lombos.monika">
+        <sqlFile  dbms="postgresql"
+                  encoding="UTF-8"
+                  endDelimiter="\nGO"
+                  path="schema-postgresql.sql"
+                  relativeToChangelogFile="true"
+                  splitStatements="true"
+                  stripComments="true"/>
+    </changeSet>
+
+
+</databaseChangeLog>
