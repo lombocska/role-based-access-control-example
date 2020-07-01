@@ -171,5 +171,6 @@ Note: docker settings (host.docker.internal) works for MacOS, but on Windows it 
 - [ ] ELK stack for logging
 - [ ] publish to docker hub via github actions
 - [ ] prometheus metrics for failed, succeeded login attempts
+- [ ] shared cache instead of Map for storing login attempt 
 
 
